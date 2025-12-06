@@ -3,7 +3,8 @@ package repository
 import (
 	"context"
 
-	"go-clean-arch-template/internal/domain"
+	"user-management/internal/domain"
+
 	"gorm.io/gorm"
 )
 

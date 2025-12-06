@@ -3,8 +3,8 @@ package http
 import (
 	"fmt"
 
-	"go-clean-arch-template/internal/config"
-	"go-clean-arch-template/internal/usecase"
+	"user-management/internal/config"
+	"user-management/internal/usecase"
 
 	"github.com/gofiber/fiber/v2"
 )

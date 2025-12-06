@@ -3,12 +3,12 @@ package main
 import (
 	"log"
 
-	"go-clean-arch-template/internal/config"
-	"go-clean-arch-template/internal/infrastructure/db"
-	"go-clean-arch-template/internal/infrastructure/http"
-	"go-clean-arch-template/internal/infrastructure/logger"
-	"go-clean-arch-template/internal/repository"
-	"go-clean-arch-template/internal/usecase"
+	"user-management/internal/config"
+	"user-management/internal/infrastructure/db"
+	"user-management/internal/infrastructure/http"
+	"user-management/internal/infrastructure/logger"
+	"user-management/internal/repository"
+	"user-management/internal/usecase"
 )
 
 func main() {

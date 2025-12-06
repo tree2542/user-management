@@ -1,4 +1,4 @@
-module go-clean-arch-template
+module user-management
 
 go 1.20
 

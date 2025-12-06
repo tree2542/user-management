@@ -3,10 +3,11 @@ package http
 import (
 	"strconv"
 
+	"user-management/internal/delivery/dto"
+	"user-management/internal/domain"
+	"user-management/internal/usecase"
+
 	"github.com/gofiber/fiber/v2"
-	"go-clean-arch-template/internal/delivery/dto"
-	"go-clean-arch-template/internal/domain"
-	"go-clean-arch-template/internal/usecase"
 )
 
 // Controller

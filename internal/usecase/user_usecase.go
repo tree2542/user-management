@@ -3,12 +3,12 @@ package usecase
 import (
 	"context"
 
-	"go-clean-arch-template/internal/domain"
-	"go-clean-arch-template/internal/repository"
-	"go-clean-arch-template/internal/infrastructure/logger"
+	"user-management/internal/domain"
+	"user-management/internal/infrastructure/logger"
+	"user-management/internal/repository"
 )
 
-//# Application Business Rules
+// # Application Business Rules
 // handler
 type UserUsecase struct {
 	repo repository.UserRepository

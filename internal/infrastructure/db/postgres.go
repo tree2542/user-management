@@ -3,8 +3,9 @@ package db
 import (
 	"log"
 
-	"go-clean-arch-template/internal/config"
-	"go-clean-arch-template/internal/domain"
+	"user-management/internal/config"
+	"user-management/internal/domain"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
