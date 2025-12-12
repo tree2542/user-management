@@ -14,10 +14,12 @@ type Server struct {
 	cfg *config.Config
 }
 
-func NewServer(cfg *config.Config, userUC *usecase.UserUsecase) *Server {
+func NewServer(cfg *config.Config,
+	userUC *usecase.UserUsecase,
+	loginUC *usecase.LoginUsecase) *Server {
 	app := fiber.New()
 
-	RegisterRoutes(app, userUC)
+	RegisterRoutes(app, userUC, loginUC)
 
 	return &Server{app, cfg}
 }

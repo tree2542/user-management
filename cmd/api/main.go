@@ -22,8 +22,9 @@ func main() {
 
 	userRepo := repository.NewUserRepository(postgres)
 	userUC := usecase.NewUserUsecase(userRepo, logg)
+	loginUC := usecase.NewLoginUsecase(userRepo, logg)
 
-	server := http.NewServer(cfg, userUC)
+	server := http.NewServer(cfg, userUC, loginUC)
 
 	if err := server.Start(); err != nil {
 		log.Fatal(err)

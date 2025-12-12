@@ -1,8 +1,6 @@
 package http
 
 import (
-	"strconv"
-
 	"user-management/internal/delivery/dto"
 	// "user-management/internal/domain"
 	"user-management/internal/usecase"
@@ -41,15 +39,13 @@ func (h *UserHandler) Create(c *fiber.Ctx) error {
 	return c.Status(200).JSON(resp)
 }
 
+// func (h *UserHandler) GetByID(c *fiber.Ctx) error {
+// 	id, _ := strconv.Atoi(c.Params("id"))
 
+// 	user, err := h.uc.GetUser(c.Context(), uint(id))
+// 	if err != nil {
+// 		return c.Status(404).JSON(err.Error())
+// 	}
 
-func (h *UserHandler) GetByID(c *fiber.Ctx) error {
-	id, _ := strconv.Atoi(c.Params("id"))
-
-	user, err := h.uc.GetUser(c.Context(), uint(id))
-	if err != nil {
-		return c.Status(404).JSON(err.Error())
-	}
-
-	return c.JSON(user)
-}
+// 	return c.JSON(user)
+// }

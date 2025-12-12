@@ -12,7 +12,7 @@ import (
 // db cmd
 type UserRepository interface {
 	Create(ctx context.Context, u *domain.User) error
-	GetByID(ctx context.Context, id uint) (*domain.User, error)
+	GetByUsername(ctx context.Context, username string) (*domain.User, error)
 }
 
 type userRepository struct {
@@ -27,9 +27,9 @@ func (r *userRepository) Create(ctx context.Context, u *domain.User) error {
 	return r.db.WithContext(ctx).Create(u).Error
 }
 
-func (r *userRepository) GetByID(ctx context.Context, id uint) (*domain.User, error) {
+func (r *userRepository) GetByUsername(ctx context.Context, username string) (*domain.User, error) {
 	var user domain.User
-	err := r.db.WithContext(ctx).First(&user, id).Error
+	err := r.db.WithContext(ctx).Where("username = ?", username).First(&user).Error
 	if err != nil {
 		return nil, err
 	}

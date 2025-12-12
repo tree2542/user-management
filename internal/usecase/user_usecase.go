@@ -45,6 +45,6 @@ func (uc *UserUsecase) CreateUser(ctx context.Context, req *dto.UserCreateReques
 	return nil
 }
 
-func (uc *UserUsecase) GetUser(ctx context.Context, id uint) (*domain.User, error) {
-	return uc.userRepo.GetByID(ctx, id)
-}
+// func (uc *UserUsecase) GetUser(ctx context.Context, id uint) (*domain.User, error) {
+// 	return uc.userRepo.GetByID(ctx, id)
+// }

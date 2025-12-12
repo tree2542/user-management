@@ -21,3 +21,11 @@ func (r *ResponseModel) SetInternalServerError(data interface{}) {
 	r.Data = data
 }
 
+func (r *ResponseModel) SetNotFoundError(data interface{}) {
+	r.StatusCode = 404
+	r.MessageTh = "ไม่พบข้อมูล"
+	r.MessageEn = "not found"
+	r.Data = data
+}
+
+
