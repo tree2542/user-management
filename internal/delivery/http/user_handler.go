@@ -4,13 +4,13 @@ import (
 	"strconv"
 
 	"user-management/internal/delivery/dto"
-	"user-management/internal/domain"
+	// "user-management/internal/domain"
 	"user-management/internal/usecase"
 
 	"github.com/gofiber/fiber/v2"
 )
 
-// Controller
+// Controller (ถ้า Clean จะเรียกว่าเป็น Handler)
 type UserHandler struct {
 	uc *usecase.UserUsecase
 }
@@ -21,22 +21,27 @@ func NewUserHandler(uc *usecase.UserUsecase) *UserHandler {
 
 func (h *UserHandler) Create(c *fiber.Ctx) error {
 	var req dto.UserCreateRequest
+	var resp dto.ResponseModel
 
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
 
-	user := &domain.User{
-		Username: req.Username,
-		Email:    req.Email,
+	if err := h.uc.CreateUser(c.Context(), &req); err != nil {
+		//แยกเงื่อนไขการแบ่ง error ในนี้
+		resp.SetInternalServerError("แตกจ้า")
+		return c.Status(500).JSON(resp)
 	}
 
-	if err := h.uc.CreateUser(c.Context(), user); err != nil {
-		return c.Status(500).JSON(err.Error())
+	setResponse := dto.ResultModel{
+		ResultTest: "TESTTTTTT",
 	}
 
-	return c.JSON(fiber.Map{"message": "created"})
+	resp.SetSuccess(setResponse)
+	return c.Status(200).JSON(resp)
 }
+
+
 
 func (h *UserHandler) GetByID(c *fiber.Ctx) error {
 	id, _ := strconv.Atoi(c.Params("id"))

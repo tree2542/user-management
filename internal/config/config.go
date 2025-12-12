@@ -8,15 +8,15 @@ import (
 )
 
 type Config struct {
-	AppPort   string
+	AppPort     string
 	PostgresDsn string
 }
 
 func Load() *Config {
-	_ = godotenv.Load()
+	godotenv.Load()
 
 	return &Config{
-		AppPort:    getEnv("APP_PORT", ":8080"),
+		AppPort:     getEnv("APP_PORT", ":8080"),
 		PostgresDsn: getEnv("POSTGRES_DSN", "host=localhost user=postgres password=postgres dbname=demo port=5432 sslmode=disable"),
 	}
 }

@@ -5,38 +5,43 @@ import (
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+
+	"user-management/internal/usecase/port"
 )
 
+var _ port.Logger = (*Logger)(nil)
+
 type Logger struct {
-	zerolog.Logger
+	l zerolog.Logger
 }
 
 func New() *Logger {
-	// ใช้ console log ตอน dev, json log ตอน production
-	var logger zerolog.Logger
 
-	if os.Getenv("APP_ENV") == "production" {
-		logger = zerolog.New(os.Stdout).
-			With().
-			Timestamp().
-			Logger()
-	} else {
-		logger = log.Output(zerolog.ConsoleWriter{Out: os.Stdout})
+	// dev mode = console log
+	if os.Getenv("APP_ENV") != "production" {
+		consoleWriter := zerolog.ConsoleWriter{
+			Out: os.Stdout,
+		}
+
+		return &Logger{
+			l: log.Output(consoleWriter),
+		}
 	}
 
+	// production = JSON log
 	return &Logger{
-		Logger: logger,
+		l: zerolog.New(os.Stdout).With().Timestamp().Logger(),
 	}
 }
 
-func (l *Logger) Info(msg string, fields ...interface{}) {
-	l.Logger.Info().Fields(fields).Msg(msg)
+func (lg *Logger) Info(msg string, fields ...interface{}) {
+	lg.l.Info().Fields(fields).Msg(msg)
 }
 
-func (l *Logger) Error(err error, msg string, fields ...interface{}) {
-	l.Logger.Error().Err(err).Fields(fields).Msg(msg)
+func (lg *Logger) Error(msg string, fields ...interface{}) {
+	lg.l.Error().Fields(fields).Msg(msg)
 }
 
-func (l *Logger) Warn(msg string, fields ...interface{}) {
-	l.Logger.Warn().Fields(fields).Msg(msg)
+func (lg *Logger) Warn(msg string, fields ...interface{}) {
+	lg.l.Warn().Fields(fields).Msg(msg)
 }
