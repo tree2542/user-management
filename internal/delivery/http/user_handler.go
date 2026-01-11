@@ -17,7 +17,7 @@ func NewUserHandler(uc *usecase.UserUsecase) *UserHandler {
 	return &UserHandler{uc}
 }
 
-func (h *UserHandler) Create(c *fiber.Ctx) error {
+func (h *UserHandler) Register(c *fiber.Ctx) error {
 	var req dto.UserCreateRequest
 	var resp dto.ResponseModel
 
@@ -27,12 +27,12 @@ func (h *UserHandler) Create(c *fiber.Ctx) error {
 
 	if err := h.uc.CreateUser(c.Context(), &req); err != nil {
 		//แยกเงื่อนไขการแบ่ง error ในนี้
-		resp.SetInternalServerError("แตกจ้า")
+		resp.SetInternalServerError("พบข้อผิดพลาด")
 		return c.Status(500).JSON(resp)
 	}
 
 	setResponse := dto.ResultModel{
-		ResultTest: "TESTTTTTT",
+		ResultTest: "ลงทะเบียนสำเร็จ",
 	}
 
 	resp.SetSuccess(setResponse)

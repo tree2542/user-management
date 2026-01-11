@@ -29,7 +29,11 @@ func (uc *UserUsecase) CreateUser(ctx context.Context, req *dto.UserCreateReques
 
 	user := domain.User{
 		Username: req.Username,
+		FirstName: req.FirstName,
+		LastName: req.LastName,
+		Password: req.Password, //Hash in the future
 		Email:    req.Email,
+		Role: "",
 	}
 	user.SetModel()
 
